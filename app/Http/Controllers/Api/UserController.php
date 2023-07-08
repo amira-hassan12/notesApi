@@ -14,7 +14,6 @@ class UserController extends Controller
     //create user
     public function createUser(Request $request)
     {
-
         try {
             //validate data
             $validateUser = Validator::make(
@@ -23,7 +22,6 @@ class UserController extends Controller
                     'name' => 'required',
                     'email' => 'required|email|unique:users,email',
                     'password' => 'required'
-
                 ]
             );
 
@@ -61,7 +59,6 @@ class UserController extends Controller
                 [
                     'email' => 'required|email',
                     'password' => 'required'
-
                 ]
             );
             if ($validateUser->fails()) {
@@ -81,7 +78,7 @@ class UserController extends Controller
             $user = User::where('email', $request->email)->first();
             return response()->json([
                 'status' => true,
-                'message' => 'USer logged In Successfully',
+                'message' => 'User logged In Successfully',
                 'token' => $user->createToken("API TOKEN")->plainTextToken
             ], 200);
         } catch (\Throwable $th) {
@@ -97,8 +94,7 @@ class UserController extends Controller
         try{
         $request->user()->currentAccessToken()->delete();
         return response()->json([
-            'message'=>'User Successfully logged out',
-            'data'=>$request->user()
+            'message'=>'User Successfully logged out'
         ],200);
         } catch (\Throwable $th) {
             return response()->json([

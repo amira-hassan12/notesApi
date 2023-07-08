@@ -10,6 +10,6 @@ Route::middleware('guest:sanctum')->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group(function(){
+    Route::apiResource('/note', NoteController::class);
     Route::post('/auth/logout',[UserController::class,'logout']);
-    Route::apiResource('note', NoteController::class);
 });
